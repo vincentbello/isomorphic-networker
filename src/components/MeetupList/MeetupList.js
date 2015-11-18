@@ -51,12 +51,12 @@ export default class MeetupList extends Component {
           {!meetups.loaded &&
             <Spinner />
           }
-          {meetups.loaded && !meetups.data.length &&
+          {meetups.loaded && !Object.keys(meetups.data).length &&
             <h4>You have not added any meetups yet.</h4>
           }
-          {meetups.loaded && meetups.data.length &&
-            meetups.data.map((meetup) =>
-              <Meetup meetup={meetup} key={meetup.id} />
+          {meetups.loaded && Object.keys(meetups.data).length &&
+            Object.keys(meetups.data).map((meetupId) =>
+              <Meetup meetup={meetups.data[meetupId]} key={meetupId} />
             )
           }
         </div>

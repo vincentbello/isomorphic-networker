@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 
 export default class Meetup extends Component {
   static propTypes = {
-    meetup: PropTypes.object.isRequired
+    meetup: PropTypes.object.isRequired,
+    selectMeetup: PropTypes.func.isRequired
   }
 
   render() {
@@ -12,7 +13,7 @@ export default class Meetup extends Component {
 
     return (
       <div className={styles.meetup}>
-        <Link to={'meetups/' + meetup.id}
+        <Link to={'/meetups/' + meetup.id}
           className={styles.meetupLink}>
           <h5 className={styles.meetupListName}>{meetup.name}</h5>
           <div className={styles.meetupListCaption}>{meetup.address}</div>

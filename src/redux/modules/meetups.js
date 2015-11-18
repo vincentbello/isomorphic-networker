@@ -1,16 +1,25 @@
 import Firebase from 'firebase';
 
 const MEETUPS_REPLACE = 'MEETUPS_REPLACE';
+const MEETUPS_SELECT = 'MEETUPS_SELECT';
 
 const initialState = {
   loaded: false,
-  data: []
+  data: {},
+  selected: null
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case MEETUPS_REPLACE:
-      return { data: action.value, loaded: true }; // Replace state entirely
+      return Object.assign({}, state, {
+        data: action.value,
+        loaded: true
+      }); // Replace state entirely
+    case MEETUPS_SELECT:
+      return Object.assign({}, state, {
+        selected: action.value
+      });
     default:
       return state;
   }
@@ -37,17 +46,27 @@ export function listenToMeetupChanges() {
 
     ref.child('events').on('value', (snapshot) => {
 
-      const newMeetups = [];
+      const newMeetups = {};
 
       snapshot.forEach(meetupObj => {
         const meetup = meetupObj.val();
         meetup.id = meetupObj.key();
-        console.log(meetup.id);
-        newMeetups.push(meetup);
+        newMeetups[meetup.id] = meetup;
       });
 
       dispatch(replaceMeetups(newMeetups));
     });
+  };
+}
+
+/**
+ * Select a specific meetup
+ */
+export function selectMeetup(meetupId) {
+  console.log(`selecting meetup ${meetupId}`);
+  return {
+    type: MEETUPS_SELECT,
+    value: meetupId
   };
 }
 
