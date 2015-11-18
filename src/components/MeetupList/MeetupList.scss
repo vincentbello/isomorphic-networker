@@ -1,0 +1,34 @@
+.meetupList {
+  float: left;
+  width: 300px;
+  height: 100%;
+  // border-right: 1px solid $gray-2;
+  // background-color: $gray-1;
+
+  .meetupListHeader {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.7rem;
+    // border-bottom: 1px solid $gray-2;
+
+    .meetupListTitle {
+      text-transform: uppercase;
+    }
+
+    .fa-plus-circle {
+      float: left;
+      position: relative;
+      left: 10px;
+      top: 4px;
+    }
+
+    .fa-caret-down {
+      float: right;
+      position: relative;
+      right: 5px;
+      top: 3px;
+      font-weight: 600;
+    }
+  }
+}

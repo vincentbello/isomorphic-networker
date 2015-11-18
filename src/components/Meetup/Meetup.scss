@@ -1,0 +1,89 @@
+// @import "../../theme/variables.scss";
+
+.meetup {
+  padding: 15px 10px;
+  // background-color: $white;
+  // border-bottom: 1px solid $gray-1;
+
+  .meetupLink {
+    color: #222;
+    text-decoration: none;
+
+    .meetupListName {
+      font-size: 1.9rem;
+      line-height: 2.7rem;
+      margin-bottom: 0;
+    }
+
+    .meetupListCaption {
+      font-size: 1.4rem;
+      color: #999;
+    }
+
+    .fa-angle-right {
+      opacity: 0;
+      float: right;
+      position: relative;
+      bottom: 35px;
+      transition: opacity 0.2s ease-in;
+    }
+  }
+
+  &.selected {
+
+    .meetupListNname {
+      font-weight: 600;
+    }
+
+    .fa-angle-right {
+      opacity: 1;
+    }
+  }
+
+  .subconnectionList {
+    list-style-type: none;
+    margin: 0.8rem 0;
+
+    .listHeader {
+      text-transform: uppercase;
+      // color: $gray-4;
+      font-size: 1.4rem;
+      font-weight: 600;
+
+      i.fa-plus-circle {
+        float: right;
+        margin-right: -10px;
+        // color: $gray-4;
+
+        &:hover {
+          // color: $link-color-hover;
+        }
+      }
+    }
+
+    .subconnection {
+      margin: 0 0 0.8rem 1rem;
+
+      i.fa-angle-right {
+        opacity: 0;
+        transition: opacity 0.2s ease-in;
+        font-weight: 600;
+        float: right;
+      }
+
+      .selected {
+        font-weight: 600;
+
+        i.fa-angle-right {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .meetupListName {
+      // color: $link-color-hover;
+    }
+  }
+}
