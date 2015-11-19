@@ -3,8 +3,7 @@ import { Link } from 'react-router';
 
 export default class Meetup extends Component {
   static propTypes = {
-    meetup: PropTypes.object.isRequired,
-    selectMeetup: PropTypes.func.isRequired
+    meetup: PropTypes.object.isRequired
   }
 
   render() {

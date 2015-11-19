@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { listenToMeetupChanges } from 'redux/modules/meetups';
+import { listenToConnectionChanges } from 'redux/modules/connections';
 // import connectData from 'helpers/connectData';
 import { Spinner, Meetup } from 'components';
 
@@ -16,15 +17,17 @@ import { Spinner, Meetup } from 'components';
   state => ({
     meetups: state.meetups
   }),
-  dispatch => bindActionCreators({listenToMeetupChanges}, dispatch))
+  dispatch => bindActionCreators({listenToMeetupChanges, listenToConnectionChanges}, dispatch))
 export default class MeetupList extends Component {
   static propTypes = {
     meetups: PropTypes.object,
-    listenToMeetupChanges: PropTypes.func.isRequired
+    listenToMeetupChanges: PropTypes.func.isRequired,
+    listenToConnectionChanges: PropTypes.func.isRequired
   }
 
   componentWillMount() {
     this.props.listenToMeetupChanges();
+    this.props.listenToConnectionChanges();
   }
 
   render() {
