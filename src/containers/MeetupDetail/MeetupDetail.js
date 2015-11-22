@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setMeetupFilter, filterConnections } from 'redux/modules/connections';
-import { Spinner } from 'components';
+import { Connection, Spinner } from 'components';
 
 @connect(
   state => ({
@@ -38,9 +38,26 @@ export default class MeetupDetail extends Component {
         <h1>{meetup.name}</h1>
         <h3 className="subheadline">{meetup.address}</h3>
         <h4>Connections</h4>
-        <ul>
-          {filteredConnections.map(connection => <li>{connection.name}</li>)}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Position</th>
+              <th>Contact</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {filteredConnections.map(connection => (
+              <Connection connection={connection} key={connection.id} />
+              )
+            )}
+
+          </tbody>
+        </table>
       </div>
     ) : (
       <Spinner text="Loading meetup..."/>

@@ -52,6 +52,7 @@ export default (store) => {
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
       <Route path="meetups/:meetupId" component={MeetupDetail} />
+    { /* <Route path="connections/:connectionId" component={ConnectionDetail} /> */ }
 
       { /* Catch all routes */ }
       <Route path="*" component={NotFound} status={404} />

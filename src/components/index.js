@@ -14,5 +14,6 @@ export WidgetForm from './WidgetForm/WidgetForm';
 
 export MeetupList from './MeetupList/MeetupList';
 export Meetup from './Meetup/Meetup';
+export Connection from './Connection/Connection';
 export Spinner from './Spinner/Spinner';
 
