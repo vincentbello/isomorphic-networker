@@ -8,14 +8,15 @@ export default class Meetup extends Component {
 
   render() {
     const { meetup } = this.props;
-    const styles = require('./Meetup.scss');
+    const { id, name, address } = meetup;
+    const style = require('./Meetup.scss');
 
     return (
-      <div className={styles.meetup}>
-        <Link to={'/meetups/' + meetup.id}
-          className={styles.meetupLink}>
-          <h5 className={styles.meetupListName}>{meetup.name}</h5>
-          <div className={styles.meetupListCaption}>{meetup.address}</div>
+      <div className={style.meetup}>
+        <Link to={'/meetups/' + id}
+          className={style.meetupLink}>
+          <h5 className={style.meetupListName}>{name}</h5>
+          <div className={style.meetupListCaption}>{address}</div>
           <i className="fa fa-lg fa-angle-right"></i>
         </Link>
       </div>

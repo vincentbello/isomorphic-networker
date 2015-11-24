@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { contactAttribs } from 'utils/constants';
+import { Image } from 'components';
 
 export default class Connection extends Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export default class Connection extends Component {
       <tr className="connection">
         <td>
           {photo.length > 0 &&
-            <img src={photo} height="30" width="30" />
+            <Image src={photo} height="30" width="30" />
           }
         </td>
         <td>

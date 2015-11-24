@@ -1,4 +1,61 @@
+@import '../../theme/variables.scss';
+
+@font-face {
+  font-family: "SF";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../theme/fonts/SF-UI-Text-Light.otf");
+}
+
+@font-face {
+  font-family: "SF";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../../theme/fonts/SF-UI-Text-Regular.otf");
+}
+
+@font-face {
+  font-family: "SF";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../../theme/fonts/SF-UI-Text-Medium.otf");
+}
+
+@font-face {
+  font-family: "SF";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../../theme/fonts/SF-UI-Text-Bold.otf");
+}
+
+@font-face {
+  font-family: "SF";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../../theme/fonts/SF-UI-Display-UltraLight.otf");
+}
+
+body {
+  overflow: hidden;
+  font-family: "SF", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1.3rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
 .app {
+  display: flex;
+  margin-top: 55px;
+
   .brand {
     position: absolute;
     $size: 40px;
@@ -17,6 +74,85 @@
     line-height: 20px;
   }
 }
+
 .appContent {
-  margin: 50px 0; // for fixed navbar
+  flex: 1 0 0;
+}
+
+:global(.fa-circle.divider) {
+  font-size: 4px;
+  position: relative;
+  top: -3px;
+  margin: 0 12px 0 10px;
+}
+
+:global(.link-danger) {
+  font-weight: 500;
+  color: $red-danger;
+
+  &:hover {
+    color: $red-danger-dark;
+  }
+}
+
+:global(.centered) {
+  text-align: center;
+}
+
+:global(.info) {
+  color: $gray-4;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+:global(i.fa) {
+  margin-right: 3px;
+
+  &:global(.fa-2x) {
+    vertical-align: middle;
+  }
+
+  &:global(.fa-envelope) {
+    color: $gray-3;
+  }
+
+  &:global(.fa-linkedin-square) {
+    color: $color-linkedin;
+  }
+
+  &:global(.fa-facebook-square) {
+    color: $color-facebook;
+  }
+
+  &:global(.fa-twitter-square) {
+    color: $color-twitter;
+  }
+
+  &:global(.fa-phone-square) {
+    color: $color-phone;
+  }
+
+  &:global(.fa-skype) {
+    color: $color-skype;
+  }
+
+}
+
+:global(.detailHeader) {
+  width: 100%;
+  padding: 15px 0 5px;
+  text-align: center;
+  background-color: $white;
+  border-bottom: 1px solid $gray-2;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+}
+
+:global(.detailContent) {
+  padding: 15px 10px 50px;
 }

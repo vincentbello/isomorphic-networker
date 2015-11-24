@@ -9,4 +9,5 @@ export Survey from './Survey/Survey';
 export NotFound from './NotFound/NotFound';
 
 export MeetupDetail from './MeetupDetail/MeetupDetail';
+export ConnectionDetail from './ConnectionDetail/ConnectionDetail';
 

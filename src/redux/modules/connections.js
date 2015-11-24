@@ -76,6 +76,12 @@ export function filterConnections(connections, filter) {
   return connections.filter(connection => connection.meetupId === filter);
 }
 
+export function getConnection(connectionId, connections) {
+  const connArr = connections.filter(connection => connection.id === connectionId);
+
+  return connArr ? connArr[0] : null;
+}
+
 export function saveConnection(connection) {
   return (dispatch, getState) => {
     const { firebase } = getState();

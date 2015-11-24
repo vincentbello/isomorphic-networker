@@ -1,0 +1,12 @@
+:global(.image) {
+  opacity: 0;
+  transition: opacity 0.2s linear;
+
+  height: 80px;
+  width: 80px;
+  border-radius: 3px;
+
+  &.imageLoaded {
+    opacity: 1;
+  }
+}

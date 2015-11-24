@@ -1,0 +1,52 @@
+@import "../../theme/variables.scss";
+
+.detailConnection {
+
+  :global(.detailHeader) {
+    :global(.image) {
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
+
+  .companyInfo {
+    display: table;
+
+    :global(.image) {
+      float: left;
+      display: table-cell;
+      vertical-align: middle;
+      padding-right: 10px;
+    }
+
+    .companyInfoAttributes {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .companyInfoAttribute {
+      margin-bottom: 0;
+    }
+
+    .position {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .company {
+      font-size: 1.7rem;
+      color: $gray-5;
+    }
+
+    .location {
+      margin-bottom: 15px;
+    }
+
+    &.noLogo {
+      .company-info-attribute {
+        margin-left: 0;
+      }
+    }
+  }
+}

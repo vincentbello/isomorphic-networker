@@ -1,26 +1,26 @@
-// @import "../../theme/variables.scss";
+@import "../../theme/variables.scss";
 
 .meetup {
   padding: 15px 10px;
-  // background-color: $white;
-  // border-bottom: 1px solid $gray-1;
+  background-color: $white;
+  border-bottom: 1px solid $gray-1;
 
   .meetupLink {
     color: #222;
     text-decoration: none;
 
     .meetupListName {
-      font-size: 1.9rem;
+      font-size: 1.7rem;
       line-height: 2.7rem;
       margin-bottom: 0;
     }
 
     .meetupListCaption {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: #999;
     }
 
-    .fa-angle-right {
+    :global(.fa-angle-right) {
       opacity: 0;
       float: right;
       position: relative;
@@ -35,7 +35,7 @@
       font-weight: 600;
     }
 
-    .fa-angle-right {
+    :global(.fa-angle-right) {
       opacity: 1;
     }
   }
@@ -46,17 +46,17 @@
 
     .listHeader {
       text-transform: uppercase;
-      // color: $gray-4;
+      color: $gray-4;
       font-size: 1.4rem;
       font-weight: 600;
 
-      i.fa-plus-circle {
+      :global(i.fa-plus-circle) {
         float: right;
         margin-right: -10px;
-        // color: $gray-4;
+        color: $gray-4;
 
         &:hover {
-          // color: $link-color-hover;
+          color: $link-color-hover;
         }
       }
     }
@@ -64,7 +64,7 @@
     .subconnection {
       margin: 0 0 0.8rem 1rem;
 
-      i.fa-angle-right {
+      :global(i.fa-angle-right) {
         opacity: 0;
         transition: opacity 0.2s ease-in;
         font-weight: 600;
@@ -74,7 +74,7 @@
       .selected {
         font-weight: 600;
 
-        i.fa-angle-right {
+        :global(i.fa-angle-right) {
           opacity: 1;
         }
       }
@@ -83,7 +83,7 @@
 
   &:hover {
     .meetupListName {
-      // color: $link-color-hover;
+      color: $link-color-hover;
     }
   }
 }

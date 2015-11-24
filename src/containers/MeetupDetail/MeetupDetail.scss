@@ -1,0 +1,66 @@
+@import "../../theme/variables.scss";
+
+.detailMeetup {
+
+  .detailMeetupEventDetails {
+
+    text-align: center;
+
+    :global(i.fa) {
+      margin-left: 20px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+  }
+
+  .connectionsList {
+    table {
+      width: 100%;
+
+      tbody {
+
+        tr {
+
+          height: 60px;
+
+          td {
+
+            &:first-child {
+              padding: 5px 0 5px 5px;
+            }
+
+            :global(.image) {
+              height: 50px;
+              width: 50px;
+              border-radius: 25px;
+            }
+          }
+
+          &:nth-child(odd) {
+            background-color: $gray-1;
+          }
+
+          &:hover {
+            td:last-child i.fa {
+              opacity: 1;
+            }
+          }
+
+          td:last-child :global(i.fa) {
+            transition: opacity 0.2s ease-in;
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.detailEmpty {
+  position: relative;
+  top: 40%;
+  transform: translateY(-60%);
+  text-align: center;
+}
