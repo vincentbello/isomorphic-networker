@@ -1,28 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { listenToMeetupChanges } from 'redux/modules/meetups';
+// import { bindActionCreators } from 'redux';
+import { listenToMeetupChanges, selectMeetup } from 'redux/modules/meetups';
+import { openModal } from 'redux/modules/modal';
 import { listenToConnectionChanges } from 'redux/modules/connections';
-// import connectData from 'helpers/connectData';
 import { Spinner, Meetup } from 'components';
 
-// function fetchDataDeferred(getState, dispatch) {
-//   if (!isLoaded(getState())) {
-//     return dispatch(listenToMeetupChanges());
-//   }
-// }
 
-// @connectData(null, fetchDataDeferred)
 @connect(
   state => ({
     meetups: state.meetups
   }),
-  dispatch => bindActionCreators({listenToMeetupChanges, listenToConnectionChanges}, dispatch))
+  {listenToMeetupChanges, listenToConnectionChanges, selectMeetup, openModal})
 export default class MeetupList extends Component {
   static propTypes = {
     meetups: PropTypes.object,
     listenToMeetupChanges: PropTypes.func.isRequired,
-    listenToConnectionChanges: PropTypes.func.isRequired
+    listenToConnectionChanges: PropTypes.func.isRequired,
+    selectMeetup: PropTypes.func,
+    openModal: PropTypes.func
   }
 
   componentWillMount() {
@@ -38,7 +34,7 @@ export default class MeetupList extends Component {
     return (
       <div className={styles.meetupList}>
         <h4 className={styles.meetupListHeader}>
-          <a>
+          <a onClick={() => this.props.openModal('meetup', 'add')}>
             <i className="fa fa-plus-circle" title="Add a Meetup"></i>
           </a>
           <span className={styles.meetupListTitle}>
@@ -59,7 +55,10 @@ export default class MeetupList extends Component {
           }
           {meetups.loaded && Object.keys(meetups.data).length &&
             Object.keys(meetups.data).map((meetupId) =>
-              <Meetup meetup={meetups.data[meetupId]} key={meetupId} />
+              <Meetup meetup={meetups.data[meetupId]}
+                key={meetupId}
+                isSelected={meetupId === meetups.selected}
+                onSelect={() => this.props.selectMeetup(meetupId)} />
             )
           }
         </div>

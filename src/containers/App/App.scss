@@ -52,9 +52,18 @@ p {
   margin-bottom: 1.5rem;
 }
 
+th, td {
+  padding: 15px 15px 5px;
+  text-align: left;
+}
+
 .app {
   display: flex;
-  margin-top: 55px;
+  position: absolute;
+  top: 55px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   .brand {
     position: absolute;
@@ -76,7 +85,14 @@ p {
 }
 
 .appContent {
-  flex: 1 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+:global(.navbar-fixed-top) {
+  z-index: 0;
 }
 
 :global(.fa-circle.divider) {

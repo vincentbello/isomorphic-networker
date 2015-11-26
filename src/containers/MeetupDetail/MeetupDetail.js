@@ -21,6 +21,13 @@ export default class MeetupDetail extends Component {
     filteredConnections: PropTypes.array
   };
 
+  constructor() {
+    super();
+    this.state = {
+      removing: false
+    };
+  }
+
   componentWillMount() {
     this.props.setMeetupFilter(this.props.params.meetupId);
   }
@@ -35,6 +42,7 @@ export default class MeetupDetail extends Component {
     const style = require('./MeetupDetail.scss');
     const { meetups, params, filteredConnections } = this.props;
     const meetup = meetups.data[params.meetupId];
+    const { removing } = this.state;
 
     return meetups.loaded ? (
       <div className={style.detailMeetup}>
@@ -44,11 +52,21 @@ export default class MeetupDetail extends Component {
             <i className="fa fa-pencil icon-action"></i> Edit Meetup
           </a>
           <i className="fa fa-circle divider"></i>
+          <span className="remove-connection">
+            {removing ?
+              <span>
+                <a className="link-danger" onClick={() => console.log('removyboy jones')}>
+                  Remove
+                </a> - <a onClick={() => this.setState({removing: false})}>Cancel</a>
+              </span> :
+              <a onClick={() => this.setState({removing: true})}><i className="fa fa-trash-o icon-action"></i> Remove Meetup</a>
+            }
+          </span>
         </div>
         <div className="detailContent">
           <div className={style.detailMeetupEventDetails}>
             <p>
-              <i className="fa fa-calendar-check-o"></i> {moment(meetup.date).format('MMMM D, YYYY')}
+              <i className="fa fa-calendar-check-o"></i> {moment(new Date(meetup.date)).format('MMMM D, YYYY')}
               <i className="fa fa-map-pin"></i> {meetup.address}
               <i className="fa fa-external-link"></i> <a target="_blank" href={meetup.website}>Event Website</a>
             </p>

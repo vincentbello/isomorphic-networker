@@ -2,11 +2,16 @@ import Firebase from 'firebase';
 
 const MEETUPS_REPLACE = 'MEETUPS_REPLACE';
 const MEETUPS_SELECT = 'MEETUPS_SELECT';
+const SAVE = 'SAVE';
+const SAVE_SUCCESS = 'SAVE_SUCCESS';
+const SAVE_ERROR = 'SAVE_ERROR';
 
 const initialState = {
   loaded: false,
   data: {},
-  selected: null
+  selected: null,
+  saving: false,
+  saveError: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -20,6 +25,23 @@ export default function reducer(state = initialState, action = {}) {
       return Object.assign({}, state, {
         selected: action.value
       });
+    case SAVE:
+      return {
+        ...state,
+        saving: true,
+        saveError: null
+      };
+    case SAVE_SUCCESS:
+      return {
+        ...state,
+        saving: false,
+        saveError: null
+      };
+    case SAVE_ERROR:
+      return {
+        ...state,
+        saveError: action.error
+      };
     default:
       return state;
   }
@@ -70,12 +92,42 @@ export function selectMeetup(meetupId) {
   };
 }
 
-export function saveMeetups(meetups) {
+/**
+ * Signal that the meetup(s) has been saved
+ */
+export function saveMeetups() {
+  return {
+    type: SAVE
+  };
+}
+
+export function saveMeetupsSuccess() {
+  return {
+    type: SAVE_SUCCESS
+  };
+}
+
+export function saveMeetupsError(err) {
+  return {
+    type: SAVE_ERROR,
+    error: err
+  };
+}
+
+export function addMeetup(meetup) {
   return (dispatch, getState) => {
     const { firebase } = getState();
     const ref = new Firebase(firebase);
 
-    ref.child('events').set(meetups);
+    dispatch(saveMeetups());
+
+    ref.child('events').push(meetup, (err) => {
+      if (err) {
+        dispatch(saveMeetupsError(err));
+      }
+
+      dispatch(saveMeetupsSuccess());
+    });
   };
 }
 

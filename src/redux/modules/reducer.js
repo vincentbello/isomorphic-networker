@@ -4,6 +4,7 @@ import { routerStateReducer } from 'redux-router';
 
 import firebase from './firebase';
 import auth from './auth';
+import modal from './modal';
 import meetups from './meetups';
 import connections from './connections';
 import counter from './counter';
@@ -15,6 +16,7 @@ export default combineReducers({
   router: routerStateReducer,
   firebase,
   auth,
+  modal,
   meetups,
   connections,
   form,

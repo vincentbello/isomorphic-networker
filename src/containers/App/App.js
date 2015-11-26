@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
+import Modal from 'react-modal';
+import { modalStyle } from 'utils/constants';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { MeetupList } from 'components';
+import { closeModal } from 'redux/modules/modal';
+import { MeetupList, MeetupForm } from 'components';
 import { pushState } from 'redux-router';
 import connectData from 'helpers/connectData';
 import config from '../../config';
@@ -25,15 +28,20 @@ function fetchData(getState, dispatch) {
 
 @connectData(fetchData)
 @connect(
-  state => ({user: state.auth.user}),
-  {logout, pushState, ...firebaseActions})
+  state => ({
+    user: state.auth.user,
+    modal: state.modal
+  }),
+  {logout, pushState, ...firebaseActions, closeModal})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
+    modal: PropTypes.object,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired,
-    setFirebaseUrl: PropTypes.func.isRequired
+    setFirebaseUrl: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired
   };
 
   static contextTypes = {
@@ -60,8 +68,22 @@ export default class App extends Component {
     this.props.logout();
   }
 
+  _renderModal() {
+    const { modal } = this.props;
+    const commonProps = {
+      onClose: this.props.closeModal,
+      submit: modal.submit
+    };
+    switch (modal.form) {
+      case 'meetup':
+        return <MeetupForm {...commonProps} />;
+      default:
+        return <span>not a valid type (yet)!</span>;
+    }
+  }
+
   render() {
-    const {user} = this.props;
+    const {user, modal} = this.props;
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
@@ -116,6 +138,20 @@ export default class App extends Component {
         <div className={styles.appContent}>
           {this.props.children}
         </div>
+
+        <Modal
+          isOpen={modal.isOpen}
+          onRequestClose={this.props.closeModal}
+          style={modalStyle}>
+
+            <a onClick={this.props.closeModal}>
+              <i className="fa fa-times"></i>
+            </a>
+
+            {modal.form &&
+              this._renderModal()}
+
+        </Modal>
 
       </div>
     );

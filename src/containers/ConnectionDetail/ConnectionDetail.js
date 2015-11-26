@@ -19,6 +19,13 @@ export default class ConnectionDetail extends Component {
     connections: PropTypes.object
   };
 
+  constructor() {
+    super();
+    this.state = {
+      removing: false
+    };
+  }
+
   _renderContactInfo(contact) {
     return Object.keys(contact).map((contactType) => {
       let inner;
@@ -41,7 +48,7 @@ export default class ConnectionDetail extends Component {
             inner = value;
         }
 
-        return <p><i className={'fa fa-fw fa-2x fa-' + iconClass}></i> {name}: {inner}</p>;
+        return <p key={contactType}><i className={'fa fa-fw fa-2x fa-' + iconClass}></i> {name}: {inner}</p>;
       }
     });
   }
@@ -49,6 +56,7 @@ export default class ConnectionDetail extends Component {
   render() {
     const style = require('./ConnectionDetail.scss');
     const { params, meetups, connections } = this.props;
+    const { removing } = this.state;
 
     const connection = getConnection(params.connectionId, connections.data);
     const { name, photo, company, education, contact, impressions, meetupId } = connection;
@@ -70,6 +78,16 @@ export default class ConnectionDetail extends Component {
                   <i className="fa fa-pencil icon-action"></i> Edit Connection
                 </a>
                 <i className="fa fa-circle divider"></i>
+                <span className="remove-connection">
+                  {removing ?
+                    <span>
+                      <a className="link-danger" onClick={() => console.log('removyboy jones')}>
+                        Remove {name}?
+                      </a> - <a onClick={() => this.setState({removing: false})}>Cancel</a>
+                    </span> :
+                    <a onClick={() => this.setState({removing: true})}><i className="fa fa-trash-o icon-action"></i> Remove Connection</a>
+                  }
+                </span>
               </div>
               <div className="detailContent">
                 <div className={classnames(style.companyInfo, company.logo.length ? null : style.noLogo)}>

@@ -12,6 +12,9 @@ export MiniInfoBar from './MiniInfoBar/MiniInfoBar';
 export SurveyForm from './SurveyForm/SurveyForm';
 export WidgetForm from './WidgetForm/WidgetForm';
 
+// Modals
+export MeetupForm from './MeetupForm/MeetupForm';
+
 export MeetupList from './MeetupList/MeetupList';
 export Meetup from './Meetup/Meetup';
 export Connection from './Connection/Connection';
