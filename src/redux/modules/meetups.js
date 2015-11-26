@@ -11,6 +11,7 @@ const initialState = {
   data: {},
   selected: null,
   saving: false,
+  saveSuccess: null,
   saveError: null
 };
 
@@ -29,12 +30,17 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         saving: true,
+        saveSuccess: null,
         saveError: null
       };
     case SAVE_SUCCESS:
       return {
         ...state,
         saving: false,
+        saveSuccess: {
+          saved: true,
+          newId: action.value
+        },
         saveError: null
       };
     case SAVE_ERROR:
@@ -101,9 +107,10 @@ export function saveMeetups() {
   };
 }
 
-export function saveMeetupsSuccess() {
+export function saveMeetupsSuccess(newId) {
   return {
-    type: SAVE_SUCCESS
+    type: SAVE_SUCCESS,
+    value: newId
   };
 }
 
@@ -121,13 +128,9 @@ export function addMeetup(meetup) {
 
     dispatch(saveMeetups());
 
-    ref.child('events').push(meetup, (err) => {
-      if (err) {
-        dispatch(saveMeetupsError(err));
-      }
+    const newRef = ref.child('events').push(meetup);
 
-      dispatch(saveMeetupsSuccess());
-    });
+    dispatch(saveMeetupsSuccess(newRef.key()));
   };
 }
 

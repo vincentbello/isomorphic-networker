@@ -5,6 +5,7 @@
   width: 300px;
   overflow: auto;
   position: relative;
+  border-top: 1px solid $gray-2;
   border-right: 1px solid $gray-2;
 
   .meetupListContent {

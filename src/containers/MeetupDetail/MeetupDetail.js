@@ -81,26 +81,29 @@ export default class MeetupDetail extends Component {
               <a>
                 <i className="fa fa-plus-circle"></i> Add Connection
               </a>
-              <table>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th>Position</th>
-                    <th>Contact</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
+              {filteredConnections.length ?
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Company</th>
+                      <th>Position</th>
+                      <th>Contact</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                  {filteredConnections.map(connection => (
-                    <Connection connection={connection} key={connection.id} />
-                    )
-                  )}
+                    {filteredConnections.map(connection => (
+                      <Connection connection={connection} key={connection.id} />
+                      )
+                    )}
 
-                </tbody>
-              </table>
+                  </tbody>
+                </table> :
+                <p>You have not added any connections yet.</p>
+              }
             </div>
           </div>
         </div>
